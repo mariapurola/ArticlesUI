@@ -25,7 +25,7 @@ public class ArticlesUI extends JFrame {
 
     private static JFrame mainFrame;
 
-    private Map<String, String> wordArticlesPairs = new HashMap<String, String>();
+    private Map<String,String> wordArticlesPairs = new HashMap<String, String>();
     private Iterator<String> articlesIterator;
     private String currentWord;
     private String selectedArticle;
@@ -34,11 +34,6 @@ public class ArticlesUI extends JFrame {
     private int cookie = 1;
 
     private JLabel wordLabel;
-
-    public static void main(String[] args) throws IOException {
-        mainFrame = new ArticlesUI();
-        mainFrame.setVisible(true);
-    }
 
     public ArticlesUI() throws IOException {
         setTitle("DerDieDasGame");
