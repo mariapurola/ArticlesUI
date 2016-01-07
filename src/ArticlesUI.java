@@ -1,4 +1,7 @@
-import java.awt.BorderLayout;
+import com.sun.javafx.css.Stylesheet;
+
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -17,6 +20,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
+
+import static java.awt.Color.WHITE;
+import static java.awt.Color.red;
 
 public class ArticlesUI extends JFrame {
 
@@ -44,14 +50,16 @@ public class ArticlesUI extends JFrame {
         currentWord = articlesIterator.next();
 
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(new EmptyBorder(10, 10, 10, 10)); // padding
+        panel.setBorder(new EmptyBorder(400, 700, 300, 100)); // padding
+        panel.setBackground(WHITE);
         wordLabel = new JLabel(currentWord);
         panel.add(wordLabel, BorderLayout.NORTH);
         panel.add(createRadioPanel(), BorderLayout.CENTER);
         panel.add(createAnswerButton(), BorderLayout.SOUTH);
         setContentPane(panel);
         pack();
-        setLocationRelativeTo(null); // center window
+        // center window
+        setLocationRelativeTo(null);
     }
 
     private void loadArticlesFromFile() throws IOException {
@@ -66,6 +74,7 @@ public class ArticlesUI extends JFrame {
     private JPanel createRadioPanel() {
         JPanel panel = new JPanel();
         ButtonGroup group = new ButtonGroup();
+
         for (String article : ARTICLES) {
             JRadioButton radioButton = new JRadioButton(article);
             radioButton.setActionCommand(article);
@@ -90,7 +99,7 @@ public class ArticlesUI extends JFrame {
                     return; // do nothing
                 }
                 if (selectedArticle.equals(wordArticlesPairs.get(currentWord))) {
-                    JOptionPane.showMessageDialog(mainFrame, "Correct!");
+                    JOptionPane.showMessageDialog(mainFrame, "Correct! " + selectedArticle + " " + currentWord);
                     correctAnswers += cookie;
                     if (articlesIterator.hasNext()) {
                         currentWord = articlesIterator.next();
@@ -98,7 +107,7 @@ public class ArticlesUI extends JFrame {
                         cookie = 1;
                     } else {
                         float tulemus = ((float)correctAnswers/wordArticlesPairs.size()) * 100;
-                        JOptionPane.showMessageDialog(mainFrame, "tulemus "+tulemus + " %");
+                        JOptionPane.showMessageDialog(mainFrame, "Result: "+tulemus + " %");
                     }
                 } else {
                     JOptionPane.showMessageDialog(mainFrame, "Wrong! Try again");
